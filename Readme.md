@@ -11,3 +11,25 @@
 ```bash
 $ npm install --save message4nsq
 ```
+
+## Example
+
+```js
+var message = require('message4nsq')({
+  'nsqdTCPAddresses': 'localhost:4150'
+});
+var topic = 'devTopic';
+var channel = 'devChannel';
+var msg = {
+  foo: 'bar'
+};
+
+message.publish(topic, msg, function (err) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log('message sent.');
+  message.close();
+});
+```
