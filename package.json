@@ -1,6 +1,6 @@
 {
   "name": "message4nsq",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "provide a simple nsq client interface",
   "main": "index.js",
   "scripts": {
