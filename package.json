@@ -1,0 +1,28 @@
+{
+  "name": "message4nsq",
+  "version": "0.0.0",
+  "description": "provide a simple nsq client interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha  --print both"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josudoey/message4nsq.git"
+  },
+  "author": "Joey Fang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josudoey/message4nsq/issues"
+  },
+  "homepage": "https://github.com/josudoey/message4nsq#readme",
+  "dependencies": {
+    "nsqjs": "^0.7.13"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.11",
+    "sinon": "^1.17.7"
+  }
+}
