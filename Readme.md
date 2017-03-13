@@ -15,8 +15,10 @@ $ npm install --save message4nsq
 ## Example
 
 ```js
+var bluebird = require('bluebird');
 var message = require('message4nsq')({
-  'nsqdTCPAddresses': 'localhost:4150'
+  'nsqdTCPAddresses': 'localhost:4150',
+  promisify: bluebird.promisify
 });
 var topic = 'devTopic';
 var channel = 'devChannel';
@@ -31,5 +33,10 @@ message.publish(topic, msg, function (err) {
   }
   console.log('message sent.');
   message.close();
+});
+
+var reader = message.watch(topic, channel, function (msg) {
+  console.log('message recv: ' + JSON.stringify(msg.json()));
+  msg.finish();
 });
 ```
