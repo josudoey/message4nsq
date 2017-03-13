@@ -1,4 +1,5 @@
 var nsq = require('nsqjs');
+var getPublisher = require('./publisher');
 module.exports = function (opts) {
   opts = opts || {
     nsqdTCPAddresses: 'localhost:4150'
@@ -8,7 +9,7 @@ module.exports = function (opts) {
     tcpAddress = tcpAddress[0];
   }
   var hostIP = tcpAddress.split(':');
-  var publisher = require('./publisher')(hostIP[0], hostIP[1]);
+  var publisher = getPublisher(hostIP[0], hostIP[1]);
   var publish = (opts.promisify) ? opts.promisify(publisher.publish) : publisher.publish;
   return {
     watch: function (topic, channel, fn) {
