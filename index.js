@@ -1,4 +1,5 @@
 var nsq = require('nsqjs');
+var merge = require('merge');
 var getPublisher = require('./publisher');
 module.exports = function (opts) {
   opts = opts || {
@@ -12,8 +13,14 @@ module.exports = function (opts) {
   var publisher = getPublisher(hostIP[0], hostIP[1]);
   var publish = (opts.promisify) ? opts.promisify(publisher.publish) : publisher.publish;
   return {
-    watch: function (topic, channel, fn) {
-      var reader = new nsq.Reader(topic, channel, opts);
+    watch: function (topic, channel, optsOrFn, fn) {
+      var options = merge(true, opts);
+      if (typeof optsOrFn === 'function') {
+        fn = optsOrFn;
+      } else if (typeof optsOrFn === 'object') {
+        merge(options, optsOrFn);
+      }
+      var reader = new nsq.Reader(topic, channel, options);
       reader.connect();
       if (fn) {
         reader.on('message', fn);
