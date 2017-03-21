@@ -38,7 +38,9 @@ module.exports = function (address, port, opts) {
     writer.publish(topic, msgs, cb);
   };
   var close = function () {
-    writer.close();
+    if (writer.ready) {
+      writer.close();
+    }
   };
   writer.on('ready', function () {
     flush();
